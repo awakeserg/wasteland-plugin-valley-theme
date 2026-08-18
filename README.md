@@ -22,6 +22,12 @@ than a colour swap:
 - **the map** — a frame and a deep inset shadow, so a drawn map looks like a map
   rather than like a screenshot of one.
 
+Both of those open as screens rather than as windows: sized to the display
+instead of to their contents, with the lists in two columns where there is room
+for two and the close button at the foot rather than wherever the last list
+happened to end. A dialog that is 400px tall on a day with three journal entries
+and 900px on a day with twelve is a panel that moves under the reader.
+
 ## It is not only for the game
 
 The palette applies to the whole application — the model vault, the plugin list,
