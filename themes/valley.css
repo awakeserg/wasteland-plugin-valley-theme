@@ -140,54 +140,21 @@
   background: #100c07;
   border-color: var(--amber-dim);
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), inset 0 0 90px rgba(0, 0, 0, 0.55);
-  /* Taken over from `.modal-box`, which sizes every dialog in the app for a
-     shell command or an About box. These two are the screen you play on. */
-  max-width: none;
   padding: 1.1rem 1.5rem;
 }
 
 /**
- * A screen, not a box that shrinks to fit its text.
+ * Nothing here sizes a dialog.
  *
- * Sized to the window rather than to the content, because a dialog that is
- * 400px tall on a day with three journal entries and 900px tall on a day with
- * twelve is a panel that moves under the reader. A definite height also lets
- * the close button sit at the foot where it belongs instead of wherever the
- * last list happened to end.
- */
-.sheet-box {
-  width: min(72rem, 94vw);
-  height: min(86vh, 54rem);
-  max-height: none;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* The lists scroll, not the dialog: the heading and the close button stay put. */
-.sheet-body {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding-right: 0.4rem;
-}
-
-.sheet-box .row {
-  margin-top: 0.9rem;
-}
-
-/**
- * The map, sized so the picture cannot outgrow the window.
+ * A version of this gave the sheet a fixed height so it would read as a screen,
+ * and with the lists split across three of them there is little in any one — so
+ * what it read as was a large empty panel. Sizing to the contents is what every
+ * other theme does and what the application does on its own.
  *
- * The board holds a 3:2 aspect ratio and fills the box, so its height follows
- * the box's width — and a dialog sized only in `vw` grows a picture taller than
- * the screen on a wide, short monitor. The third term is what stops that: at
- * 112vh of width the board comes out around 74vh tall, which leaves the heading
- * and the close button their room whatever shape the window is.
+ * The map is the exception and it is not handled here either: it wants the
+ * window whatever theme is on, so that belongs in the application's own
+ * stylesheet rather than in one theme that happens to care.
  */
-.board-box {
-  width: min(90rem, 96vw, 112vh);
-}
 
 .board-label {
   font-size: 1.05em;
@@ -225,29 +192,6 @@
 
 .sheet-empty {
   font-style: italic;
-}
-
-/**
- * Two columns for the sheet, where there is room for two.
- *
- * The lists are short — a quest, a few items, two wounds — and in one column
- * down the middle of a wide dialog they read as a narrow strip with a great
- * deal of nothing beside them. Guarded by width rather than applied always:
- * two columns of four words each is worse than one.
- */
-@media (min-width: 1100px) {
-  .sheet-body {
-    display: block;
-    columns: 2;
-    column-gap: 2.6rem;
-  }
-
-  /* `columns` breaks anywhere by default, and a heading stranded at the foot of
-     the first column with its list in the second is worse than no columns. */
-  .sheet-group {
-    break-inside: avoid;
-    margin-bottom: 1.1rem;
-  }
 }
 
 /* The map gets a frame, because a drawn map with a hairline round it looks like
