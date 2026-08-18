@@ -1,0 +1,190 @@
+/*
+ * Valley — a warmer screen for playing in.
+ *
+ * Two halves, and the difference between them matters.
+ *
+ * The first is the palette, and it is nothing but `:root` variables. A theme is
+ * loaded after the app's own stylesheet, so equal-specificity rules win on
+ * order alone and no `!important` is needed anywhere. Overriding the app's own
+ * selectors would break the next time it adds a rule, so this half never does.
+ *
+ * The second half does override selectors, and only these: `.scene`, `.sheet-*`
+ * and `.board-*`. Those are the game surfaces, they arrived with the game, and
+ * they are the whole reason for a theme aimed at playing rather than at reading
+ * a terminal. That is the one bargain being struck here — everything else stays
+ * a variable swap.
+ *
+ * Nothing here sets `display` on anything the app toggles with `hidden`
+ * (`.scene`, `.scene-actions`, `.modal`, `.player`). The weakest author rule
+ * outranks the whole UA sheet, so a `display` on one of those would pin it open
+ * forever — the trap the app's own stylesheet carries a comment about.
+ */
+
+:root {
+  /* Ink on parchment rather than acid amber: the same warmth as the drawn map,
+     so the panel and the picture do not look like two different programs. */
+  --amber: #e6c188;
+  --amber-bright: #ffe4b0;
+  --amber-dim: #a88251;
+  --amber-faint: #4c3823;
+
+  --bg: #0c0906;
+  --bg-panel: #14100a;
+  --bg-deep: #070503;
+
+  --warn: #e0603a;
+  /* Moss rather than a signal green — it has to sit on a hand-drawn landscape. */
+  --ok: #8fbf6a;
+  --add: #c9a227;
+
+  --btn-bg: #2b2016;
+  --btn-bg-hover: #3d2e1f;
+  --btn-bg-active: #080604;
+  --summary-bg: #191207;
+
+  /* Much softer. The glow is what made small text smear over the map. */
+  --glow: 0 0 4px rgba(230, 193, 136, 0.22);
+}
+
+/* ============================ the game panel ============================ */
+
+.scene {
+  border-top: 1px solid var(--amber-faint);
+  background: linear-gradient(180deg, rgba(201, 162, 39, 0.06), transparent 70%);
+  padding: 0.5rem 0.7rem;
+  gap: 0.35rem;
+}
+
+.scene-title {
+  color: var(--amber-bright);
+  letter-spacing: 0.08em;
+  font-size: 1.08em;
+}
+
+.scene-sub {
+  font-style: italic;
+}
+
+/* Taller bars. A health bar 8px high is a detail; this is the thing the player
+   watches most, and it should be readable from across the desk. */
+.scene-meter .meter {
+  height: 12px;
+  border-color: var(--amber-faint);
+  background: #1b1409;
+}
+
+/* The default fill is the body text colour, and on a parchment palette that is
+   a pale cream — a bar that reads as empty at a glance. Gold fills, and the
+   three tones keep their meaning. */
+.scene-meter .meter > i {
+  background: linear-gradient(180deg, #e0b53f, #a87a1c);
+}
+
+.scene-meter .meter.good > i {
+  background: linear-gradient(180deg, #a6d47c, #6d9c4a);
+}
+
+.scene-meter .meter.warn > i {
+  background: linear-gradient(180deg, #e59a3a, #b06a1c);
+}
+
+.scene-meter .meter.bad > i {
+  background: linear-gradient(180deg, #e0603a, #93361c);
+}
+
+.scene-meter-value {
+  color: var(--amber-bright);
+}
+
+.scene-tag {
+  padding: 0.05rem 0.45rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.92em;
+}
+
+/* ---- the row of moves ---- */
+
+.scene-actions {
+  border-top: 1px solid var(--amber-faint);
+  background: rgba(0, 0, 0, 0.35);
+  gap: 0.35rem;
+  padding: 0.4rem 0.6rem;
+  /* Roomier buttons need more room. The app caps this so a game offering ten
+     moves cannot push the composer off a short window; the cap has to move with
+     the padding or the last row ends up behind a scrollbar. */
+  max-height: 9.5rem;
+}
+
+.scene-action {
+  padding: 0.25rem 0.6rem;
+  border-color: var(--amber-faint);
+  background: linear-gradient(180deg, #33261a, #221a11);
+  font-size: 0.92em;
+}
+
+.scene-action:hover:not(:disabled) {
+  background: linear-gradient(180deg, #46341f, #2b2116);
+  border-color: var(--amber-dim);
+  color: var(--amber-bright);
+}
+
+.scene-action .scene-key {
+  color: var(--amber-dim);
+}
+
+/* ============================ the sheet and the map ============================ */
+
+.sheet-box,
+.board-box {
+  background: #100c07;
+  border-color: var(--amber-dim);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), inset 0 0 90px rgba(0, 0, 0, 0.55);
+}
+
+/* A book, not a console. The lists are read as prose — names, notes, journal
+   lines — and a serif reads better than a terminal face for that. The strip
+   above stays monospace, because numbers in columns have to line up. */
+.sheet-body,
+.sheet-head {
+  font-family: 'Georgia', 'Cambria', 'Times New Roman', serif;
+}
+
+.sheet-title {
+  font-size: 1.15em;
+  letter-spacing: 0.06em;
+  color: var(--amber-bright);
+}
+
+.sheet-group-label {
+  letter-spacing: 0.16em;
+  color: var(--add);
+  border-bottom-color: var(--amber-faint);
+  font-size: 0.92em;
+}
+
+.sheet-item {
+  padding: 0.12rem 0;
+}
+
+.sheet-item.pressable:hover:not(:disabled) {
+  background: #241a10;
+  border-color: var(--amber-dim);
+}
+
+.sheet-empty {
+  font-style: italic;
+}
+
+/* The map gets a frame, because a drawn map with a hairline round it looks like
+   a screenshot of a map rather than a map. */
+.board {
+  border: 2px solid var(--amber-faint);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.75);
+}
+
+.board-label {
+  font-family: 'Georgia', 'Cambria', 'Times New Roman', serif;
+  letter-spacing: 0.05em;
+  background: rgba(8, 5, 3, 0.85);
+}
