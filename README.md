@@ -3,8 +3,6 @@
 Parchment and bronze instead of amber on black. It dresses the whole
 application, and it dresses the game panel in particular.
 
-![The panel, the character sheet and the map under Valley](docs/valley.png)
-
 ## What it changes
 
 **Everywhere.** The palette is warmer and quieter: ink-on-parchment text on a
