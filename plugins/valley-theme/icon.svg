@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
+     stroke="#ffb000" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter">
+  <!-- Half a disc, which is what "a different set of colours" looks like in one
+       glyph. The outline is a stroke and only the half is filled: the app tints
+       icons through its own palette, and an entirely solid shape comes out of
+       that as a blob where an outline keeps its shape. -->
+  <circle cx="12" cy="12" r="8.5" />
+  <path d="M12 3.5 A8.5 8.5 0 0 1 12 20.5 Z" fill="#ffb000" stroke="none" />
+</svg>

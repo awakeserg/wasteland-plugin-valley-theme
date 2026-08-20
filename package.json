@@ -1,0 +1,12 @@
+{
+  "name": "wasteland-plugin-valley-theme",
+  "private": true,
+  "type": "module",
+  "description": "Valley — a parchment theme for Wasteland Next, dressing the whole application and the game panel in particular.",
+  "license": "Apache-2.0",
+  "author": "awakeserg",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "index": "node scripts/build-index.mjs"
+  }
+}
